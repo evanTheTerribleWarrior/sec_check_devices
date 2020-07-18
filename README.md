@@ -32,6 +32,8 @@ sudo nmap -sn <local_network>
 ALTERNATIVE: You can also install the twilio-cli, a very cool command line interface for all the twilio APIs, and replace the curl command in the script with the relevant twilio command
 https://www.twilio.com/docs/twilio-cli/quickstart
 
+You can add these directly or as env variables, for example on /etc/environment, but this will also depend on your distro, so this is left to you to add
+
 4. Realistically, you would not like to run manually the script, but rather through a cron job. You can create/edit a crontab and add the relevant required params
 ```bash
 sudo crontab -e
