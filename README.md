@@ -28,7 +28,7 @@ sudo nmap -sn <local_network>
 
 3. Add your Twilio parameters as requested to send the SMS. You need:
 - Account Sid and Auth Token
-- Twilio Number and Your Personal Number
+- Twilio Number and Your Personal Number  
 ALTERNATIVE: You can also install the twilio-cli, a very cool command line interface for all the twilio APIs, and replace the curl command in the script with the relevant twilio command
 https://www.twilio.com/docs/twilio-cli/quickstart
 
