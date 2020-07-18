@@ -1,0 +1,35 @@
+#!/bin/bash
+sudo nmap -sn 192.168.1.0/24 > tmp_nmap
+OUTPUT=""
+NEWLINE=$'\n'
+while read line; do
+  if [[ $line == *"192.168."* ]]; then
+    DEVICE_NAME=$(echo "$line" | awk '{print $5}')
+  fi
+  if [[ $line == *"MAC"* ]]; then
+    MAC=$(echo "$line" | awk '{print $3}')
+    OUTPUT_LINE=$DEVICE_NAME,$MAC
+    OUTPUT+="$OUTPUT_LINE${NEWLINE}"
+  fi
+  
+done < tmp_nmap
+
+echo "$OUTPUT" | grep "\S" > tmp_output
+
+COMPARE=$(sort tmp_output DEVLICE_LIST_PATH | uniq -u)
+
+if [[ "$COMPARE" != "" ]]
+then
+ curl -X POST https://api.twilio.com/2010-04-01/Accounts/${TWILIO_ACCOUNT_SID}/Messages.json \
+  --data-urlencode "Body=New devices found $COMPARE" \
+  --data-urlencode "From=TWILIO_NUMBER" \
+  --data-urlencode "To=YOUR_NUMBER" \
+  -u ${TWILIO_ACCOUNT_SID}:${TWILIO_AUTH_TOKEN}
+fi
+
+sudo rm tmp_*
+
+
+
+
+
