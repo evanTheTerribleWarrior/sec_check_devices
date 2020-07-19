@@ -45,3 +45,7 @@ and then add something like
 The above is to run this every minute. If you want to check how to change this, just google about setting crontab params
 
 [![New Devices SMS](http://i.imgur.com/LObdvz9.png)]()
+
+# TODO
+- Include cmd line params for local network IP and Twilio credentials
+- Automate cron creation
